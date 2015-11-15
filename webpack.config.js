@@ -1,0 +1,61 @@
+var Path = require('path');
+var WebPack = require('webpack');
+
+var srcPath = Path.resolve(__dirname, 'src');
+var distPath = Path.resolve(__dirname, 'dist');
+
+module.exports = {
+  target: 'web',
+  context: srcPath,
+  entry: [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/dev-server',
+    './index',
+  ],
+  output: {
+    path: distPath,
+    filename: 'bundle.js'
+  },
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loader: 'babel',
+      exclude: /node_modules/
+    }]
+  },
+  resolve: {
+    alias: {
+      actions: Path.resolve(srcPath, 'actions'),
+      components: Path.resolve(srcPath, 'components'),
+      constants: Path.resolve(srcPath, 'constants'),
+      containers: Path.resolve(srcPath, 'containers'),
+      lib: Path.resolve(srcPath, 'lib'),
+      reducers: Path.resolve(srcPath, 'reducers'),
+      selectors: Path.resolve(srcPath, 'selectors'),
+      styles: Path.resolve(srcPath, 'styles'),
+      utils: Path.resolve(srcPath, 'utils')
+    },
+    extensions: ['', '.js', '.jsx']
+  },
+  plugins: [
+    new WebPack.DefinePlugin({}),
+    new WebPack.optimize.OccurrenceOrderPlugin(),
+    new WebPack.optimize.DedupePlugin(),
+    new WebPack.HotModuleReplacementPlugin(),
+    new WebPack.NoErrorsPlugin()
+  ],
+  devServer: {
+    host: 'localhost',
+    port: 3000,
+    publicPath: 'http://localhost:3000/',
+    contentBase: srcPath,
+    hot: true,
+    quiet: false,
+    noInfo: false,
+    lazy: false,
+    historyApiFallback: true,
+    stats: {
+      colors: true
+    }
+  }
+};
