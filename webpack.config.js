@@ -2,6 +2,7 @@ require('dotenv').load();
 
 var Path = require('path');
 var WebPack = require('webpack');
+var autoprefixer = require('autoprefixer');
 
 var env = process.env.NODE_ENV;
 var srcPath = Path.resolve(__dirname, 'src');
@@ -24,6 +25,9 @@ module.exports = {
       test: /\.js$/,
       loader: 'babel',
       exclude: /node_modules/
+    }, {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader!postcss-loader'
     }]
   },
   resolve: {
@@ -78,5 +82,8 @@ module.exports = {
     stats: {
       colors: true
     }
+  },
+  postcss: function () {
+    return [autoprefixer]
   }
 };
