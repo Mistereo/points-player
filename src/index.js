@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Player from 'containers/Player';
+import Application from './containers/Application';
 
-
-ReactDOM.render(<Player/>, document.getElementById('container'));
+ReactDOM.render(<Application/>, document.body);

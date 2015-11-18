@@ -18,68 +18,70 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic,300,500italic,300italic,100italic,100&subset=latin,cyrillic">
 </head>
 <body>
-<header class="points-header">
-  <div class="points-header__row">
-    <svg class="logo-image" width="28" height="28">
-      <circle cx="6" cy="6" r="6" fill="#FC502D"/>
-      <circle cx="22" cy="6" r="6" fill="#4A90E2"/>
-      <circle cx="6" cy="22" r="6" fill="#4A90E2"/>
-      <circle cx="22" cy="22" r="6" fill="#FC502D"/>
-    </svg>
-    <span class="logo-title">
-      Точки <span class="logo-subtitle">плеер</span>
-    </span>
-    <div class="flex-spacer"></div>
-  </div>
-</header>
-<main class="content">
-  <div class="points-player">
-    <img class="points-player__field" src="http://placehold.it/740x600/ffffff/333333?text=Field" alt="">
-    <div class="points-player__sidebar">
-      <div class="points-player__actions">
-        <div class="points-player__actions-row">
-          <button class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons">skip_previous</i>
-          </button>
-          <button class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons material-icons--rotate-180">navigate_before</i>
-          </button>
-          <button class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons">navigate_next</i>
-          </button>
-          <button class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons">skip_next</i>
-          </button>
+<div class="container">
+  <header class="points-header">
+    <div class="points-header__row">
+      <svg class="logo-image" width="28" height="28">
+        <circle cx="6" cy="6" r="6" fill="#FC502D"/>
+        <circle cx="22" cy="6" r="6" fill="#4A90E2"/>
+        <circle cx="6" cy="22" r="6" fill="#4A90E2"/>
+        <circle cx="22" cy="22" r="6" fill="#FC502D"/>
+      </svg>
+      <span class="logo-title">
+        Точки <span class="logo-subtitle">плеер</span>
+      </span>
+      <div class="flex-spacer"></div>
+    </div>
+  </header>
+  <main class="content">
+    <div class="points-player">
+      <img class="points-player__field" src="http://placehold.it/740x600/ffffff/333333?text=Field" alt="">
+      <div class="points-player__sidebar">
+        <div class="points-player__actions">
+          <div class="points-player__actions-row">
+            <button class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">skip_previous</i>
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons material-icons--rotate-180">navigate_before</i>
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">navigate_next</i>
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">skip_next</i>
+            </button>
 
-          <div class="mdl-layout-spacer"></div>
+            <div class="mdl-layout-spacer"></div>
 
-          <button class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons">expand_more</i>
-          </button>
-          <button class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons">more_vert</i>
-          </button>
+            <button class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">expand_more</i>
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">more_vert</i>
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="points-player__tabs tabs">
-        <div class="tabs__tab-bar">
-          <a href="#" class="tabs__tab is-active">Комментарии</a>
-          <a href="#" class="tabs__tab">Информация</a>
-          <div class="tabs__slider"></div>
+        <div class="points-player__tabs tabs">
+          <div class="tabs__tab-bar">
+            <a href="#" class="tabs__tab is-active">Комментарии</a>
+            <a href="#" class="tabs__tab">Информация</a>
+            <div class="tabs__slider"></div>
+          </div>
+          <div class="tabs__content is-active">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates molestias, fugiat sequi? Tempora ratione temporibus delectus quasi praesentium dolore ipsum voluptate sapiente, ab hic culpa numquam perspiciatis ducimus sunt odit.
+          </div>
+          <div class="tabs__content">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque voluptates quae a ducimus officia ullam repudiandae voluptas blanditiis aliquam numquam, suscipit accusamus nemo, omnis placeat, sequi excepturi. Perspiciatis, iste, ipsa.
+          </div>
         </div>
-        <div class="tabs__content is-active">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates molestias, fugiat sequi? Tempora ratione temporibus delectus quasi praesentium dolore ipsum voluptate sapiente, ab hic culpa numquam perspiciatis ducimus sunt odit.
-        </div>
-        <div class="tabs__content">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque voluptates quae a ducimus officia ullam repudiandae voluptas blanditiis aliquam numquam, suscipit accusamus nemo, omnis placeat, sequi excepturi. Perspiciatis, iste, ipsa.
-        </div>
-      </div>
-      <div class="points-player__game-tree">
+        <div class="points-player__game-tree">
 
+        </div>
       </div>
     </div>
-  </div>
-</main>
+  </main>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.0.6/material.min.js"></script>
 <script src="bundle.js"></script>
 </body>
