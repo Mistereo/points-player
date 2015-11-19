@@ -2,11 +2,13 @@ import React from 'react';
 import classNames from 'classnames';
 
 import Tabs from './Tabs';
+import CanvasField from './CanvasField';
 import IconButton from './IconButton';
 
 
 export default ({
   className,
+  ...otherProps,
 }) => {
   const classes = classNames(
     className,
@@ -14,7 +16,7 @@ export default ({
   );
   return (
     <div className={classes}>
-      <img className="points-player__field" src="http://placehold.it/740x600/ffffff/333333?text=Field" alt=""/>
+      <CanvasField className="points-player__field" {...otherProps}/>
       <div className="points-player__sidebar">
         <div className="points-player__actions">
           <div className="points-player__actions-row">

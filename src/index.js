@@ -1,6 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SGF from 'sgfjs';
+import { Provider } from 'react-redux';
 
 import Application from './containers/Application';
+import normalizeSGFTree from './utils/normalizeSGFTree';
+import configureStore from './store/configureStore';
 
-ReactDOM.render(<Application/>, document.body);
+
+const store = configureStore();
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Application/>
+  </Provider>,
+  document.body
+);
