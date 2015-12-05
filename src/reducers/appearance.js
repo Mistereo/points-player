@@ -6,7 +6,7 @@ export const initialState = {
   emptyColor: '#AAAAAA',
   blueColor: '#4169E1',
   redColor: '#DC143C',
-  gridColor: '#DDDDDD',
+  gridColor: '#CCCCCC',
 
   pointRadius: 5,
   margin: 10,

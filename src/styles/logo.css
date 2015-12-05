@@ -1,13 +1,17 @@
-.logo-image {
+.logo {
+  font-size: 20px;
+}
+
+.logo__image {
   margin-right: 8px;
+  vertical-align: middle;
 }
 
-.logo-title {
-  font-size: 20px;
+.logo__title {
   font-weight: 500;
+  vertical-align: middle;
 }
 
-.logo-subtitle {
-  font-size: 20px;
+.logo__subtitle {
   font-weight: 300;
 }

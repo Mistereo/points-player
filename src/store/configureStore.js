@@ -1,22 +1,28 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { persistState } from 'redux-devtools';
+
 import createLogger from 'redux-logger';
 
 import rootReducer from '../reducers';
-
+import DevTools from '../containers/DevTools';
 
 const finalCreateStore = compose(
-  applyMiddleware(createLogger())
+  applyMiddleware(createLogger()),
+  DevTools.instrument(),
+  persistState(
+    window.location.href.match(
+      /[?&]debug_session=([^&]+)\b/
+    )
+  )
 )(createStore);
 
 export default function configureStore(initialState) {
   const store = finalCreateStore(rootReducer, initialState);
 
   if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
-      const nextReducer = require('../reducers');
-      store.replaceReducer(nextReducer);
-    });
+    module.hot.accept('../reducers', () =>
+      store.replaceReducer(require('../reducers'))
+    );
   }
 
   return store;

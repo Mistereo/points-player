@@ -1,17 +1,30 @@
 import { createSelector } from 'reselect';
 
-import nodesSelector from './nodesSelector';
-import cursorSelector from './cursorSelector';
 import appearanceSelector from './appearanceSelector';
+import {
+  gameCursorSelector,
+  gameMovesSelector,
+  gameActiveNodeSelector,
+  gameSelector,
+  gameNavigationSelector,
+  gameNavigationTreeSelector } from './gameSelectors';
 
 
 export default createSelector(
-  cursorSelector,
-  nodesSelector,
+  gameCursorSelector,
+  gameMovesSelector,
+  gameActiveNodeSelector,
+  gameNavigationSelector,
+  gameSelector,
   appearanceSelector,
-  (cursor, nodes, appearance) => ({
+  gameNavigationTreeSelector,
+  (cursor, moves, activeNode, navigation, game, appearance, navigationTree) => ({
     cursor,
-    nodes,
-    ...appearance,
+    moves,
+    activeNode,
+    navigation,
+    navigationTree,
+    game,
+    appearance,
   })
 );

@@ -7,6 +7,8 @@ import Header from '../components/Header';
 import * as Actions from '../actions';
 import rootSelector from '../selectors';
 
+import '../styles/application.css';
+
 
 class Application extends Component {
   render() {

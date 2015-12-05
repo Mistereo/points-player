@@ -1,34 +1,32 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import GameRenderer from 'lib/GameRenderer';
 import Game from 'lib/Game.js';
 
 
 const CanvasField = ({
-  width = 39,
-  height = 32,
-  moves = [],
+  game,
   className,
   children = 'Canvas unsupported.',
-  ...otherProps,
+  onClick,
+  ...otherProps
 }) => (
   <canvas
     className={className}
     ref={(canvas) => {
-      const game = new Game({ width, height });
-      moves.forEach(move => {
-        if (game.check(move)) {
-          game.apply(move);
-        }
-      });
-
-      new GameRenderer({
-        canvas,
-        xSize: width,
-        ySize: height,
+      const renderer = new GameRenderer({
         ...otherProps,
-      }).renderGame(game);
+        canvas,
+        xSize: game.width,
+        ySize: game.height,
+        onClick
+      });
+      renderer.renderGame(game);
     }}>{children}</canvas>
 );
+
+CanvasField.propTypes = {
+  game: PropTypes.instanceOf(Game).isRequired
+};
 
 export default CanvasField;

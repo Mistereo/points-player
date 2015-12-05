@@ -1,33 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 
 
-function upgrade(node) {
-  if (window.componentHandler) {
-    window.componentHandler.upgradeElement(node);
+export default class IconButton extends Component {
+  componentDidMount() {
+    window.componentHandler.upgradeElement(this.button);
+  }
+  componentWillUnmount() {
+    window.componentHandler.downgradeElements(this.button);
+  }
+  render() {
+    const {
+      icon = 'lens',
+      onClick,
+      clasName,
+      ...otherProps,
+    } = this.props;
+
+    const classes = classNames(
+      clasName,
+      'mdl-button',
+      'mdl-button--icon',
+      'mdl-js-button'
+    );
+
+    return (
+      <button
+        {...otherProps}
+        className={classes}
+        onClick={onClick}
+        ref={node => { this.button = node; }}>
+        <i className="material-icons">{icon}</i>
+      </button>
+    );
   }
 }
-
-const IconButton = ({
-  icon = 'lens',
-  onClick,
-  clasName,
-}) => {
-  const classes = classNames(
-    clasName,
-    'mdl-button',
-    'mdl-button--icon',
-    'mdl-js-button'
-  );
-
-  return (
-    <button
-      className={classes}
-      onClick={onClick}
-      ref={upgrade}>
-      <i className="material-icons">{icon}</i>
-    </button>
-  );
-};
-
-export default IconButton;

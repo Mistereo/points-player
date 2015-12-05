@@ -15,7 +15,8 @@ describe('appearance reducer', () => {
   it('should handle SET_APPEARANCE', () => {
     expect(
       appearance({
-        prop: 'value'
+        prop: 'value',
+        anotherProp: 'value',
       }, {
         type: SET_APPEARANCE,
         payload: {
@@ -23,7 +24,8 @@ describe('appearance reducer', () => {
         }
       })
     ).toEqual({
-      prop: 'new value'
+      prop: 'new value',
+      anotherProp: 'value',
     })
   })
 

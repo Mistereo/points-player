@@ -45,7 +45,7 @@ export default class CanvasRenderer {
       x = Math.abs(Math.round((x - margin - 1) / cellSize));
       y = Math.abs(Math.round((y - margin - 1) / cellSize));
 
-      onClick.call(this, x, y, event);
+      onClick.call(this, { x, y }, event);
     };
 
     this.clear();
@@ -133,7 +133,7 @@ export default class CanvasRenderer {
     const { x, y } = points.shift();
     ctx.moveTo(this.cc(x), this.cc(y));
     points.forEach(
-      ({ x, y }) => ctx.lineTo(this.cc(x), this.cc(y))
+      (point) => ctx.lineTo(this.cc(point.x), this.cc(point.y))
     );
 
     ctx.closePath();
@@ -141,6 +141,20 @@ export default class CanvasRenderer {
     ctx.fill();
     ctx.globalAlpha = 1;
     ctx.stroke();
+    ctx.restore();
+
+    return this;
+  }
+
+  renderLastMoveMarker({ x, y }) {
+    const { pointRadius } = this.options;
+    const ctx = this.ctx;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.fillStyle = '#FFF';
+    ctx.arc(this.cc(x), this.cc(y), Math.floor(pointRadius / 2) + 0.5, 0, 2 * Math.PI);
+    ctx.fill();
     ctx.restore();
 
     return this;

@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import Tab from './Tab';
 import TabContent from './TabContent';
 
+import '../styles/tabs.css';
+
 
 export default class Tabs extends Component {
   static propTypes = {

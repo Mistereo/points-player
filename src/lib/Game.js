@@ -11,6 +11,7 @@ export default class Game extends Field {
     height = 30,
   }) {
     super(width, height);
+    this.moving = BLUE;
   }
   check({ x, y }) {
     return this.contains({ x, y }) &&
@@ -38,8 +39,10 @@ export default class Game extends Field {
     if (!somethingCaptured) {
       const opponentColor = (color === BLUE) ? RED : BLUE;
       const captured = this.findCaptured(x, y, opponentColor);
-      captured.forEach(pos => this.owner(pos, color));
+      captured.forEach(pos => this.owner(pos, opponentColor));
     }
+
+    this.moving = (color === BLUE) ? RED : BLUE;
   }
   findCaptured(sx, sy, color) {
     const used = {};

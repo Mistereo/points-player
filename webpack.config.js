@@ -11,6 +11,7 @@ var distPath = Path.resolve(__dirname, 'dist');
 module.exports = {
   target: 'web',
   context: srcPath,
+  devtool: 'cheap-module-eval-source-map',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/dev-server',
@@ -60,8 +61,8 @@ module.exports = {
     (env == 'production') ? [
       new WebPack.optimize.UglifyJsPlugin({
         compress : {
-          'unused'    : true,
-          'dead_code' : true
+          unused: true,
+          dead_code: true
         }
       })
     ] : [
@@ -83,7 +84,5 @@ module.exports = {
       colors: true
     }
   },
-  postcss: function () {
-    return [autoprefixer]
-  }
+  postcss: [autoprefixer]
 };

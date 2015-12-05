@@ -1,6 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import Logo from './Logo';
+
+import '../styles/header.css';
+
 
 const Header = ({
   className,
@@ -16,15 +20,10 @@ const Header = ({
   return (
     <header className={classes}>
       <div className="points-header__row">
-        <svg className="logo-image" width="28" height="28">
-          <circle cx="6" cy="6" r="6" fill={redColor}/>
-          <circle cx="22" cy="6" r="6" fill={blueColor}/>
-          <circle cx="6" cy="22" r="6" fill={blueColor}/>
-          <circle cx="22" cy="22" r="6" fill={redColor}/>
-        </svg>
-        <span className="logo-title">
-          {title} <span className="logo-subtitle">{subtitle}</span>
-        </span>
+        <Logo title={title}
+              subtitle={subtitle}
+              blueColor={blueColor}
+              redColor={redColor}/>
         <div className="flex-spacer"></div>
       </div>
     </header>

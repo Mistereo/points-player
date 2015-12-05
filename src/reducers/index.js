@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
 import appearance from './appearance';
-import player from './player';
+import game from './game';
 
 const rootReducer = combineReducers({
   appearance,
-  player,
+  game,
 });
 
 export default rootReducer;
