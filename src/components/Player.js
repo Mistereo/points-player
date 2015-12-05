@@ -11,7 +11,7 @@ import Tree from './Tree';
 import '../styles/player.css';
 
 
-export default ({
+const Player = ({
   className,
   activeNode,
   game,
@@ -80,3 +80,5 @@ export default ({
     </div>
   );
 };
+
+export default Player;
