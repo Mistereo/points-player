@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 
-import GameRenderer from 'lib/GameRenderer';
-import Game from 'lib/Game.js';
-
+import GameRenderer from '../lib/GameRenderer';
+import Game from '../lib/Game.js';
 
 const CanvasField = ({
   game,
@@ -14,14 +13,16 @@ const CanvasField = ({
   <canvas
     className={className}
     ref={(canvas) => {
-      const renderer = new GameRenderer({
-        ...otherProps,
-        canvas,
-        xSize: game.width,
-        ySize: game.height,
-        onClick
-      });
-      renderer.renderGame(game);
+      if (canvas) {
+        const renderer = new GameRenderer({
+          ...otherProps,
+          canvas,
+          xSize: game.width,
+          ySize: game.height,
+          onClick
+        });
+        renderer.renderGame(game);
+      }
     }}>{children}</canvas>
 );
 
