@@ -64,7 +64,7 @@ export default class Game extends Field {
       }
 
       used[id] = true;
-      if (this.color(pos) !== color) {
+      if (this.owner(pos) !== color) {
         captured.push(pos);
 
         if (!this.empty(pos)) {
