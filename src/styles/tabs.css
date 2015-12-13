@@ -56,8 +56,9 @@
   display: none;
   overflow: auto;
   padding: 10px;
+  flex: 1 1 auto;
 }
 
 .tabs__content.is-active {
-  display: block;
+  display: flex;
 }
