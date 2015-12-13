@@ -8,6 +8,7 @@ const CanvasField = ({
   className,
   children = 'Canvas unsupported.',
   onClick,
+  activeNode,
   ...otherProps
 }) => (
   <canvas
@@ -22,6 +23,7 @@ const CanvasField = ({
           onClick
         });
         renderer.renderGame(game);
+        renderer.renderLastMoveMarker(activeNode);
       }
     }}>{children}</canvas>
 );

@@ -7,6 +7,7 @@ import CanvasField from './CanvasField';
 import IconButton from './IconButton';
 import MDLMenu from './MDLMenu';
 import Tree from './Tree';
+import Comment from './Comment';
 
 import '../styles/player.css';
 
@@ -30,9 +31,9 @@ const Player = ({
 
   return (
     <div className={classes}>
-      <CanvasField {...otherProps}
-                   game={game}
+      <CanvasField game={game}
                    className="points-player__field"
+                   activeNode={activeNode}
                    onClick={(position) => {
                      const move = {
                        ...position,
@@ -72,8 +73,7 @@ const Player = ({
           label: 'Информация',
           content: '',
         }]}/>
-        <Tree {...otherProps}
-              {...navigationTree}
+        <Tree {...navigationTree}
               cursor={cursor}
               actions={actions}/>
       </div>
