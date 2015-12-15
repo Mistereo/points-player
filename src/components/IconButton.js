@@ -13,12 +13,12 @@ export default class IconButton extends Component {
     const {
       icon = 'lens',
       onClick,
-      clasName,
+      className,
       ...otherProps,
     } = this.props;
 
     const classes = classNames(
-      clasName,
+      className,
       'mdl-button',
       'mdl-button--icon',
       'mdl-js-button'
