@@ -24,25 +24,33 @@ export default class Game extends Field {
       owner: EMPTY,
     });
   }
-  apply({ x, y, color }) {
+  apply({ x, y, color, ...move }) {
+    const captures = [];
     this.place({ x, y, color });
+    this.moving = (color === BLUE) ? RED : BLUE;
+
+    if (move.processed) {
+      move.captures.forEach(({ x, y, color }) => this.owner({ x, y }, color));
+      return move.captures;
+    }
 
     let somethingCaptured = false;
     for (let t = 0; t < 4; t++) {
       const captured = this.findCaptured(x + dx[t], y + dy[t], color);
       if (captured.length) {
         somethingCaptured = true;
-        captured.forEach(pos => this.owner(pos, color));
+        captured.forEach(({ x, y }) => captures.push({ x, y, color }));
       }
     }
 
     if (!somethingCaptured) {
       const opponentColor = (color === BLUE) ? RED : BLUE;
       const captured = this.findCaptured(x, y, opponentColor);
-      captured.forEach(pos => this.owner(pos, opponentColor));
+      captured.forEach(({ x, y }) => captures.push({ x, y, color: opponentColor }));
     }
 
-    this.moving = (color === BLUE) ? RED : BLUE;
+    captures.forEach(({ x, y, color }) => this.owner({ x, y }, color));
+    return captures;
   }
   findCaptured(sx, sy, color) {
     const used = {};

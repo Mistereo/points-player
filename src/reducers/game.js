@@ -19,6 +19,7 @@ import {
   SELECT_MOVE,
   CREATE_GAME } from '../constants/actions';
 import * as Colors from '../constants/colors';
+import { gameSelector } from '../selectors/gameSelectors';
 
 
 export const initialState = {
@@ -175,14 +176,17 @@ export default createReducer(initialState, {
       const childs = target.childs;
       const id = childs[index];
 
-      return merge({}, state, {
+      return {
+        ...state,
         cursor: id,
         tree: {
+          ...state.tree,
           [position]: {
-            childs: union([childs[index]], childs),
-          },
-        },
-      });
+            ...state.tree[position],
+            childs: union([childs[index]], childs)
+          }
+        }
+      }
     }
 
     // NOTE: Maybe it's better to introduce id generator.
@@ -195,15 +199,25 @@ export default createReducer(initialState, {
       childs: [],
     };
 
-    return merge({}, state, {
+    const game = gameSelector({
+      game: state
+    });
+
+    move.captures = game.apply(move);
+    move.processed = true;
+
+    return {
+      ...state,
       cursor: id,
       tree: {
+        ...state.tree,
         [id]: move,
         [position]: {
+          ...state.tree[position],
           childs: union([id], target.childs),
-        },
-      },
-    });
+        }
+      }
+    }
   },
   [ADD_COMMENT]: (state, { payload }) => {
     const { position, comment } = payload;
