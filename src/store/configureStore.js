@@ -8,7 +8,7 @@ import DevTools from '../containers/DevTools';
 
 let configureStore = (initialState) => {
   return createStore(rootReducer, initialState);
-}
+};
 
 if (process.env.NODE_ENV !== 'production') {
   const finalCreateStore = compose(
@@ -31,7 +31,7 @@ if (process.env.NODE_ENV !== 'production') {
     }
 
     return store;
-  }
+  };
 }
 
 export default configureStore;
