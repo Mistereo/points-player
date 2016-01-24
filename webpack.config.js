@@ -2,6 +2,7 @@ require('dotenv').load();
 
 var Path = require('path');
 var WebPack = require('webpack');
+var HTMLPlugin = require('html-webpack-plugin');
 
 var folders = {
   src: Path.resolve(__dirname, 'src'),
@@ -16,6 +17,7 @@ module.exports = {
   ],
   output: {
     path: folders.dist,
+    publicPath: 'http://localhost:3000/',
     filename: 'bundle.js'
   },
   module: {
@@ -38,7 +40,12 @@ module.exports = {
       },
     }),
     new WebPack.optimize.OccurrenceOrderPlugin(),
-    new WebPack.optimize.DedupePlugin()
+    new WebPack.optimize.DedupePlugin(),
+    new HTMLPlugin({
+      template: Path.resolve(folders.src, 'index.html'),
+      hash: false,
+      inject: 'body',
+    })
   ],
   postcss: [require('autoprefixer')]
 };
@@ -57,7 +64,7 @@ if (process.env.NODE_ENV === 'production') {
 
 if (process.env.NODE_ENV === 'development') {
   module.exports.devtool = 'cheap-module-eval-source-map';
-  module.exports.entry.push(
+  module.exports.entry.unshift(
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/dev-server'
   );
