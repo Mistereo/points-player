@@ -7,7 +7,6 @@ import CanvasField from './CanvasField';
 import IconButton from './IconButton';
 import MDLMenu from './MDLMenu';
 import Tree from './Tree';
-import Comment from './Comment';
 
 import '../styles/player.css';
 
