@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import find from 'lodash/find';
 
 import Node from './TreeNode';
@@ -50,32 +50,54 @@ const Tree = ({
   );
 
   return (
-    <div className="points-player__game-tree" ref={node => {
-      if (node && activeNode) {
-        node.scrollLeft = cc(activeNode.x) - node.offsetWidth / 2;
-        node.scrollTop = cc(activeNode.y) - node.offsetHeight / 2;
-      }
-    }}>
-      <svg width={width}
-           height={height}
-           style={{ padding: padding }}>
-        <path d={path}
-              fill="none"
-              strokeWidth={connectionPathWidth}
-              stroke={connectionPathColor}/>
+    <div
+      className="points-player__game-tree"
+      ref={node => {
+        if (node && activeNode) {
+          node.scrollLeft = cc(activeNode.x) - node.offsetWidth / 2;
+          node.scrollTop = cc(activeNode.y) - node.offsetHeight / 2;
+        }
+      }}
+    >
+      <svg
+        width={width}
+        height={height}
+        style={{ padding }}
+      >
+        <path
+          d={path}
+          fill="none"
+          strokeWidth={connectionPathWidth}
+          stroke={connectionPathColor}
+        />
         {nodes.map(item =>
-          <Node {...otherProps}
-                x={cc(item.x)}
-                y={cc(item.y)}
-                radius={nodeRadius}
-                isActive={item.id === cursor}
-                color={item.color}
-                key={item.id}
-                label={item.x}
-                onClick={actions.selectMove.bind(this, item.id)}/>)}
+          <Node
+            {...otherProps}
+            x={cc(item.x)}
+            y={cc(item.y)}
+            radius={nodeRadius}
+            isActive={item.id === cursor}
+            color={item.color}
+            key={item.id}
+            label={item.x}
+            onClick={actions.selectMove.bind(this, item.id)}
+          />
+        )}
       </svg>
     </div>
   );
+};
+
+Tree.propTypes = {
+  cursor: PropTypes.number,
+  nodes: PropTypes.array,
+  connections: PropTypes.array,
+  nodeRadius: PropTypes.number,
+  nodeSize: PropTypes.number,
+  connectionPathWidth: PropTypes.number,
+  connectionPathColor: PropTypes.string,
+  padding: PropTypes.number,
+  actions: PropTypes.object,
 };
 
 export default Tree;

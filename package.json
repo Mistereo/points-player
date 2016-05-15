@@ -34,6 +34,8 @@
     "css-loader": "^0.23.1",
     "eslint": "^2.10.1",
     "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-react": "^5.1.1",
     "expect": "^1.20.1",
     "html-webpack-plugin": "^2.17.0",
@@ -49,7 +51,7 @@
   },
   "scripts": {
     "compile": "webpack",
-    "lint": "eslint ./src/**/*.js; exit 0",
+    "lint": "eslint src",
     "start": "webpack-dev-server",
     "test": "mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm test -- --watch"

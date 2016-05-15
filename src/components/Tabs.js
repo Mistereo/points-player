@@ -7,7 +7,7 @@ import TabContent from './TabContent';
 import '../styles/tabs.css';
 
 
-export default class Tabs extends Component {
+class Tabs extends Component {
   static propTypes = {
     activeTab: PropTypes.number,
     tabs: PropTypes.arrayOf(PropTypes.shape({
@@ -52,8 +52,10 @@ export default class Tabs extends Component {
       <div className={classes}>
         <div className="tabs__tab-bar">
           {tabs.map((tab, id) =>
-            <Tab onClick={this.selectTab.bind(this, id)} key={id}
-                 isActive={id === activeTab}>
+            <Tab
+              onClick={this.selectTab.bind(this, id)} key={id}
+              isActive={id === activeTab}
+            >
               {tab.label}
             </Tab>
           )}

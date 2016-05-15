@@ -37,7 +37,7 @@ export function addComment(position, comment) {
 }
 
 export function addMarker(position, type, params) {
-  return { type: ActionTypes.ADD_MARKER, payload: { position, type, params }};
+  return { type: ActionTypes.ADD_MARKER, payload: { position, type, params } };
 }
 
 export function setAppearance(options) {

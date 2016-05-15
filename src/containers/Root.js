@@ -8,12 +8,12 @@ const Root = ({
   store,
 }) => (
   <Provider store={store}>
-    { process.env.NODE_ENV == 'production' ?
+    {process.env.NODE_ENV === 'production' ?
       <Application /> :
       <div>
         <Application />
         <DevTools />
-      </div> }
+      </div>}
   </Provider>
 );
 

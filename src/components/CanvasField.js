@@ -9,7 +9,7 @@ const CanvasField = ({
   children = 'Canvas unsupported.',
   onClick,
   activeNode,
-  ...otherProps
+  ...otherProps,
 }) => (
   <canvas
     className={className}
@@ -20,16 +20,23 @@ const CanvasField = ({
           canvas,
           xSize: game.width,
           ySize: game.height,
-          onClick
+          onClick,
         });
         renderer.renderGame(game);
         renderer.renderLastMoveMarker(activeNode);
       }
-    }}>{children}</canvas>
+    }}
+  >
+    {children}
+  </canvas>
 );
 
 CanvasField.propTypes = {
-  game: PropTypes.instanceOf(Game).isRequired
+  game: PropTypes.instanceOf(Game).isRequired,
+  className: PropTypes.string,
+  children: PropTypes.node,
+  onClick: PropTypes.func,
+  activeNode: PropTypes.object,
 };
 
 export default CanvasField;

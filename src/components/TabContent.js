@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
 const TabContent = ({
@@ -16,6 +16,12 @@ const TabContent = ({
       {children}
     </div>
   );
+};
+
+TabContent.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  isActive: PropTypes.bool,
 };
 
 export default TabContent;

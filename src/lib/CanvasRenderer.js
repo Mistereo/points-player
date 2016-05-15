@@ -103,7 +103,7 @@ export default class CanvasRenderer {
     return this;
   }
 
-  renderPoint({x, y, color}) {
+  renderPoint({ x, y, color }) {
     const { blueColor, redColor, pointRadius } = this.options;
     const ctx = this.ctx;
 

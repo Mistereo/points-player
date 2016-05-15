@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
 
-export default class IconButton extends Component {
+class IconButton extends Component {
   componentDidMount() {
     window.componentHandler.upgradeElement(this.button);
   }
@@ -29,9 +29,18 @@ export default class IconButton extends Component {
         {...otherProps}
         className={classes}
         onClick={onClick}
-        ref={node => { this.button = node; }}>
+        ref={node => { this.button = node; }}
+      >
         <i className="material-icons">{icon}</i>
       </button>
     );
   }
 }
+
+IconButton.propTypes = {
+  icon: PropTypes.string,
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+};
+
+export default IconButton;

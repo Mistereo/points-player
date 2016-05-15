@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -10,19 +10,14 @@ import rootSelector from '../selectors';
 import '../styles/application.css';
 
 
-class Application extends Component {
-  render() {
-    const props = this.props;
-    return (
-      <div className="container">
-        <Header {...props}/>
-        <main className="content">
-          <Player {...props}/>
-        </main>
-      </div>
-    );
-  }
-}
+const Application = (props) => (
+  <div className="container">
+    <Header {...props} />
+    <main className="content">
+      <Player {...props} />
+    </main>
+  </div>
+);
 
 function mapDispatchToProps(dispatch) {
   return {

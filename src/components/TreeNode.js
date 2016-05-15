@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import { BLUE, RED } from '../constants/colors';
 
@@ -20,21 +20,38 @@ const TreeNode = ({
       cx={x}
       cy={y}
       r={radius}
-      fill={color === BLUE ? blueColor : (color === RED ? redColor : emptyColor)}/>
+      fill={color === BLUE ? blueColor : (color === RED ? redColor : emptyColor)}
+    />
     {isActive ?
       <circle
         cx={x}
         cy={y}
         r={Math.ceil(radius / 2)}
-        fill="#f8f8f8"/> :
+        fill="#f8f8f8"
+      /> :
       <text
-        {...{x, y}}
+        {...{ x, y }}
         fill={labelColor}
         style={{
           dominantBaseline: 'central',
           textAnchor: 'middle',
-        }}>{label}</text>}
+        }}
+      >{label}</text>}
   </g>
 );
+
+TreeNode.propTypes = {
+  x: PropTypes.number,
+  y: PropTypes.number,
+  color: PropTypes.number,
+  isActive: PropTypes.bool,
+  label: PropTypes.node,
+  radius: PropTypes.number,
+  emptyColor: PropTypes.string,
+  blueColor: PropTypes.string,
+  redColor: PropTypes.string,
+  labelColor: PropTypes.string,
+  onClick: PropTypes.func,
+}
 
 export default TreeNode;

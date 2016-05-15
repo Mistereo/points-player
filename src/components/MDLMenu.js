@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
-export default class MDLMenu extends Component {
+class MDLMenu extends Component {
   componentDidMount() {
     window.componentHandler.upgradeElement(this.menu);
   }
@@ -10,30 +10,43 @@ export default class MDLMenu extends Component {
   }
   render() {
     const {
-      clasName,
+      className,
       target,
       items = [],
       ...otherProps,
     } = this.props;
 
     const classes = classNames(
-      clasName,
+      className,
       'mdl-menu',
       'mdl-menu--bottom-right',
       'mdl-js-menu',
     );
 
     return (
-      <ul {...otherProps}
-          className={classes}
-          htmlFor={target}
-          ref={node => { this.menu = node }}>
+      <ul
+        {...otherProps}
+        className={classes}
+        htmlFor={target}
+        ref={node => (this.menu = node)}
+      >
         {items.map((item, key) =>
-          <li className="mdl-menu__item"
-              onClick={item.onClick}
-              key={key}>{item.title}</li>
+          <li
+            className="mdl-menu__item"
+            onClick={item.onClick}
+            key={key}
+          >{item.title}</li>
         )}
       </ul>
     );
   }
 }
+
+MDLMenu.propTypes = {
+  className: PropTypes.string,
+  target: PropTypes.string,
+  items: PropTypes.array,
+};
+
+
+export default MDLMenu;

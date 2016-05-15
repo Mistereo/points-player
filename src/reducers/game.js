@@ -3,9 +3,8 @@ import union from 'lodash/union';
 import findIndex from 'lodash/findIndex';
 import SGF from 'sgfjs';
 
-import normalizeSGFTree from '../utils/normalizeSGFTree';
 import Game from '../lib/Game';
-import createReducer from '../utils/createReducer'
+import createReducer from '../utils/createReducer';
 import cursor from './cursor';
 import {
   LOAD_SGF,
@@ -41,7 +40,7 @@ export const initialState = {
 function cursorHandler(state, action) {
   return {
     ...state,
-    cursor: cursor(state.cursor, action, state.tree)
+    cursor: cursor(state.cursor, action, state.tree),
   };
 }
 
@@ -49,8 +48,8 @@ function convertToCoords(p) {
   const map = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   return {
     x: map.indexOf(p[0]),
-    y: map.indexOf(p[1])
-  }
+    y: map.indexOf(p[1]),
+  };
 }
 
 export default createReducer(initialState, {
@@ -82,7 +81,7 @@ export default createReducer(initialState, {
     const rules = {
       set: 'russian',
       width,
-      height
+      height,
     };
 
     const tree = {
@@ -183,10 +182,10 @@ export default createReducer(initialState, {
           ...state.tree,
           [position]: {
             ...state.tree[position],
-            childs: union([childs[index]], childs)
-          }
-        }
-      }
+            childs: union([childs[index]], childs),
+          },
+        },
+      };
     }
 
     // NOTE: Maybe it's better to introduce id generator.
@@ -200,7 +199,7 @@ export default createReducer(initialState, {
     };
 
     const game = gameSelector({
-      game: state
+      game: state,
     });
 
     move.captures = game.apply(move);
@@ -215,9 +214,9 @@ export default createReducer(initialState, {
         [position]: {
           ...state.tree[position],
           childs: union([id], target.childs),
-        }
-      }
-    }
+        },
+      },
+    };
   },
   [ADD_COMMENT]: (state, { payload }) => {
     const { position, comment } = payload;

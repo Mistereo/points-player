@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
 import Logo from './Logo';
@@ -20,14 +20,24 @@ const Header = ({
   return (
     <header className={classes}>
       <div className="points-header__row">
-        <Logo title={title}
-              subtitle={subtitle}
-              blueColor={blueColor}
-              redColor={redColor}/>
+        <Logo
+          title={title}
+          subtitle={subtitle}
+          blueColor={blueColor}
+          redColor={redColor}
+        />
         <div className="flex-spacer"></div>
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  className: PropTypes.string,
+  blueColor: PropTypes.string,
+  redColor: PropTypes.string,
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
 };
 
 export default Header;

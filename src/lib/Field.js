@@ -20,6 +20,7 @@ export default class Field {
     return y * this.width + x;
   }
   contains({ x, y }) {
+    // eslint-disable-next-line
     return 0 <= x && x < this.width && 0 <= y && y < this.height;
   }
   get(pos) {
