@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
+import { pure } from 'recompose';
+
 
 class IconButton extends Component {
   componentDidMount() {
@@ -43,4 +45,4 @@ IconButton.propTypes = {
   className: PropTypes.string,
 };
 
-export default IconButton;
+export default pure(IconButton);
