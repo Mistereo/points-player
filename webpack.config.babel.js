@@ -1,17 +1,20 @@
 require('dotenv').load();
 
-import Path from 'path'
+import path from 'path';
+import WebPack from 'webpack';
+import HTMLPlugin from 'html-webpack-plugin';
+import autoprefixer from 'autoprefixer';
 
-var WebPack = require('webpack');
-var HTMLPlugin = require('html-webpack-plugin');
-
-var folders = {
-  src: Path.resolve(__dirname, 'src'),
-  dist: Path.resolve(__dirname, 'dist')
+const folders = {
+  src: path.resolve(__dirname, 'src'),
+  dist: path.resolve(__dirname, 'dist'),
 };
+
+const ENV = process.env.NODE_ENV;
 
 module.exports = {
   target: 'web',
+  devtool: 'source-map',
   context: folders.src,
   entry: [
     './index',
@@ -19,72 +22,70 @@ module.exports = {
   output: {
     path: folders.dist,
     publicPath: 'http://localhost:3000/',
-    filename: 'bundle.js'
+    filename: 'bundle.min.js',
   },
   module: {
     loaders: [{
       test: /\.js$/,
       loader: 'babel',
-      exclude: /node_modules/
+      exclude: /node_modules/,
     }, {
       test: /\.css$/,
-      loader: 'style-loader!css-loader!postcss-loader'
-    }]
+      loader: 'style-loader!css-loader!postcss-loader',
+    }],
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
   },
   plugins: [
     new WebPack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-      },
+      __ENVIRONMENT__: ENV,
+      __DEVELOPMENT__: ENV === 'development',
+      __PRODUCTION__: ENV === 'production',
+      __DEBUG__: ENV === 'development',
+      __TEST__: ENV === 'test',
+      'process.env': { NODE_ENV: JSON.stringify(ENV) },
     }),
-    new WebPack.optimize.OccurrenceOrderPlugin(),
-    new WebPack.optimize.DedupePlugin(),
     new HTMLPlugin({
-      template: Path.resolve(folders.src, 'index.html'),
+      template: path.resolve(folders.src, 'index.html'),
       hash: false,
       inject: 'body',
-    })
+    }),
   ],
-  postcss: [require('autoprefixer')]
+  postcss: [autoprefixer],
+  devServer: {
+    host: 'localhost',
+    port: 3000,
+    publicPath: 'http://localhost:3000/',
+    contentBase: folders.src,
+    hot: true,
+    inline: true,
+    quiet: false,
+    noInfo: true,
+    lazy: false,
+    historyApiFallback: true,
+    stats: {
+      colors: true,
+    },
+  },
 };
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = 'source-map';
   module.exports.plugins.push(
+    new WebPack.optimize.OccurrenceOrderPlugin(),
+    new WebPack.optimize.DedupePlugin(),
     new WebPack.optimize.UglifyJsPlugin({
-      compress : {
+      compress: {
         unused: true,
-        dead_code: true
-      }
+        dead_code: true,
+      },
     })
   );
 }
 
 if (process.env.NODE_ENV === 'development') {
   module.exports.devtool = 'cheap-module-eval-source-map';
-  module.exports.entry.unshift(
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/dev-server'
-  );
   module.exports.plugins.push(
-    new WebPack.HotModuleReplacementPlugin(),
     new WebPack.NoErrorsPlugin()
   );
-  module.exports.devServer = {
-    host: 'localhost',
-    port: 3000,
-    publicPath: 'http://localhost:3000/',
-    contentBase: folders.src,
-    hot: true,
-    quiet: false,
-    noInfo: false,
-    lazy: false,
-    historyApiFallback: true,
-    stats: {
-      colors: true
-    }
-  };
 }
