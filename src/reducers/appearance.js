@@ -1,5 +1,8 @@
 import createReducer from '../utils/createReducer'
-import { SET_APPEARANCE, RESET_APPEARANCE } from '../constants/actions'
+import {
+  setAppearance,
+  resetAppearance,
+} from '../actions'
 
 
 export const initialState = {
@@ -22,9 +25,9 @@ export const initialState = {
 }
 
 export default createReducer(initialState, {
-  [SET_APPEARANCE]: (state, { payload }) => ({
+  [setAppearance]: (state, { payload }) => ({
     ...state,
     ...payload,
   }),
-  [RESET_APPEARANCE]: () => initialState,
+  [resetAppearance]: () => initialState,
 })

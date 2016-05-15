@@ -7,17 +7,19 @@ import Game from '../lib/Game'
 import createReducer from '../utils/createReducer'
 import cursor from './cursor'
 import {
-  LOAD_SGF,
-  ADD_MOVE,
-  ADD_COMMENT,
-  ADD_MARKER,
-  NEXT_MOVE,
-  PREV_MOVE,
-  FIRST_MOVE,
-  LAST_MOVE,
-  SELECT_MOVE,
-  CREATE_GAME,
-} from '../constants/actions'
+  loadSGF,
+  createGame,
+
+  addMove,
+  addComment,
+  addMarker,
+
+  prevMove,
+  nextMove,
+  firstMove,
+  lastMove,
+  selectMove,
+} from '../actions'
 import * as Colors from '../constants/colors'
 import { gameSelector } from '../selectors/gameSelectors'
 
@@ -54,12 +56,12 @@ function convertToCoords(p) {
 }
 
 export default createReducer(initialState, {
-  [NEXT_MOVE]: cursorHandler,
-  [PREV_MOVE]: cursorHandler,
-  [FIRST_MOVE]: cursorHandler,
-  [LAST_MOVE]: cursorHandler,
-  [SELECT_MOVE]: cursorHandler,
-  [CREATE_GAME]: (state, { payload }) => ({
+  [nextMove]: cursorHandler,
+  [prevMove]: cursorHandler,
+  [firstMove]: cursorHandler,
+  [lastMove]: cursorHandler,
+  [selectMove]: cursorHandler,
+  [createGame]: (state, { payload }) => ({
     ...initialState,
     rules: {
       ...initialState.rules,
@@ -67,7 +69,7 @@ export default createReducer(initialState, {
       height: payload.height,
     },
   }),
-  [LOAD_SGF]: (state, { payload }) => {
+  [loadSGF]: (state, { payload }) => {
     const parsed = SGF.parse(payload)
     const root = parsed
 
@@ -154,7 +156,7 @@ export default createReducer(initialState, {
       tree,
     }
   },
-  [ADD_MOVE]: (state, { payload }) => {
+  [addMove]: (state, { payload }) => {
     // NOTE: this handler needs optimisation
 
     const { tree } = state
@@ -216,7 +218,7 @@ export default createReducer(initialState, {
       },
     }
   },
-  [ADD_COMMENT]: (state, { payload }) => {
+  [addComment]: (state, { payload }) => {
     const { position, comment } = payload
 
     return merge({}, state, {
@@ -227,7 +229,7 @@ export default createReducer(initialState, {
       },
     })
   },
-  [ADD_MARKER]: (state, { payload }) => {
+  [addMarker]: (state, { payload }) => {
     const { tree } = state
     const { position, type, params = {} } = payload
 

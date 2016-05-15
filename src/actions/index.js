@@ -1,49 +1,26 @@
-import * as ActionTypes from '../constants/actions'
+import { createAction } from 'redux-act'
 
-export function createGame(rules) {
-  return { type: ActionTypes.CREATE_GAME, payload: rules }
-}
+export const createGame = createAction('CREATE_GAME')
+export const loadSGF = createAction('LOAD_SGF')
 
-export function loadSGF(sgf) {
-  return { type: ActionTypes.LOAD_SGF, payload: sgf }
-}
+export const prevMove = createAction('PREV_MOVE')
+export const nextMove = createAction('NEXT_MOVE')
+export const firstMove = createAction('FIRST_MOVE')
+export const lastMove = createAction('LAST_MOVE')
+export const selectMove = createAction('SELECT_MOVE')
 
-export function prevMove() {
-  return { type: ActionTypes.PREV_MOVE }
-}
+export const addMove = createAction(
+  'ADD_MOVE',
+  (position, { x, y, color }) => ({ x, y, color, position })
+)
+export const addComment = createAction(
+  'ADD_COMMENT',
+  (position, comment) => ({ position, comment })
+)
+export const addMarker = createAction(
+  'ADD_MARKER',
+  (position, type, params) => ({ position, type, params })
+)
 
-export function nextMove() {
-  return { type: ActionTypes.NEXT_MOVE }
-}
-
-export function firstMove() {
-  return { type: ActionTypes.FIRST_MOVE }
-}
-
-export function lastMove() {
-  return { type: ActionTypes.LAST_MOVE }
-}
-
-export function selectMove(move = 0) {
-  return { type: ActionTypes.SELECT_MOVE, payload: move }
-}
-
-export function addMove(position, { x, y, color }) {
-  return { type: ActionTypes.ADD_MOVE, payload: { x, y, color, position } }
-}
-
-export function addComment(position, comment) {
-  return { type: ActionTypes.ADD_COMMENT, payload: { position, comment } }
-}
-
-export function addMarker(position, type, params) {
-  return { type: ActionTypes.ADD_MARKER, payload: { position, type, params } }
-}
-
-export function setAppearance(options) {
-  return { type: ActionTypes.SET_APPEARANCE, payload: options }
-}
-
-export function resetAppearance() {
-  return { type: ActionTypes.RESET_APPEARANCE }
-}
+export const setAppearance = createAction('SET_APPEARANCE')
+export const resetAppearance = createAction('RESET_APPEARANCE')

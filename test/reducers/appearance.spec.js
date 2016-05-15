@@ -1,7 +1,7 @@
-import expect from 'expect';
+import expect from 'expect'
 
-import appearance, { initialState } from '../../src/reducers/appearance';
-import { SET_APPEARANCE, RESET_APPEARANCE } from '../../src/constants/actions';
+import appearance, { initialState } from '../../src/reducers/appearance'
+import { setAppearance, resetAppearance } from '../../src/actions'
 
 describe('appearance reducer', () => {
   it('should handle initial state', () => {
@@ -18,10 +18,10 @@ describe('appearance reducer', () => {
         prop: 'value',
         anotherProp: 'value',
       }, {
-        type: SET_APPEARANCE,
+        type: setAppearance.getType(),
         payload: {
-          prop: 'new value'
-        }
+          prop: 'new value',
+        },
       })
     ).toEqual({
       prop: 'new value',
@@ -31,9 +31,9 @@ describe('appearance reducer', () => {
 
   it('should handle RESET_APPEARANCE', () => {
     expect(
-      appearance({}, { type: RESET_APPEARANCE })
+      appearance({}, { type: resetAppearance.getType() })
     ).toEqual(
       initialState
     )
   })
-});
+})
