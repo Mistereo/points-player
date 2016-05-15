@@ -21,7 +21,6 @@ module.exports = {
   ],
   output: {
     path: folders.dist,
-    publicPath: 'http://localhost:3000/',
     filename: 'bundle.min.js',
   },
   module: {
@@ -84,6 +83,7 @@ if (process.env.NODE_ENV === 'production') {
 
 if (process.env.NODE_ENV === 'development') {
   module.exports.entry.unshift('react-hot-loader/patch')
+  module.exports.output.publicPath = 'http://localhost:3000/'
   module.exports.devtool = 'cheap-module-eval-source-map'
   module.exports.plugins.push(
     new WebPack.NoErrorsPlugin()
