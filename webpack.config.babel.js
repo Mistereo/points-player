@@ -1,16 +1,16 @@
-require('dotenv').load();
+require('dotenv').load()
 
-import path from 'path';
-import WebPack from 'webpack';
-import HTMLPlugin from 'html-webpack-plugin';
-import autoprefixer from 'autoprefixer';
+import path from 'path'
+import WebPack from 'webpack'
+import HTMLPlugin from 'html-webpack-plugin'
+import autoprefixer from 'autoprefixer'
 
 const folders = {
   src: path.resolve(__dirname, 'src'),
   dist: path.resolve(__dirname, 'dist'),
-};
+}
 
-const ENV = process.env.NODE_ENV;
+const ENV = process.env.NODE_ENV
 
 module.exports = {
   target: 'web',
@@ -62,13 +62,12 @@ module.exports = {
     inline: true,
     quiet: false,
     noInfo: true,
-    lazy: false,
     historyApiFallback: true,
     stats: {
       colors: true,
     },
   },
-};
+}
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.plugins.push(
@@ -80,12 +79,13 @@ if (process.env.NODE_ENV === 'production') {
         dead_code: true,
       },
     })
-  );
+  )
 }
 
 if (process.env.NODE_ENV === 'development') {
-  module.exports.devtool = 'cheap-module-eval-source-map';
+  module.exports.entry.unshift('react-hot-loader/patch')
+  module.exports.devtool = 'cheap-module-eval-source-map'
   module.exports.plugins.push(
     new WebPack.NoErrorsPlugin()
-  );
+  )
 }
