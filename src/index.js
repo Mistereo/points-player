@@ -8,7 +8,7 @@ import configureStore from './store/configureStore';
 const store = configureStore();
 
 ReactDOM.render(
-  <Root store={store}/>,
+  <Root store={store} />,
   document.body
 );
 

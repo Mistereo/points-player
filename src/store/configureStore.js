@@ -1,37 +1,32 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { persistState } from 'redux-devtools';
+import thunk from 'redux-thunk';
 
-import createLogger from 'redux-logger';
+import { identity } from 'lodash';
 
-import rootReducer from '../reducers';
-import DevTools from '../containers/DevTools';
+import reducers from '../reducers';
 
-let configureStore = (initialState) => {
-  return createStore(rootReducer, initialState);
-};
 
-if (process.env.NODE_ENV !== 'production') {
-  const finalCreateStore = compose(
-    applyMiddleware(createLogger()),
-    DevTools.instrument(),
-    persistState(
-      window.location.href.match(
-        /[?&]debug_session=([^&]+)\b/
-      )
-    )
-  )(createStore);
+const middlewares = [thunk];
+const devToolsExtension = window.devToolsExtension;
 
-  configureStore = (initialState) => {
-    const store = finalCreateStore(rootReducer, initialState);
+export default function configureStore(initialState) {
+  const enhancer = compose(
+    applyMiddleware(...middlewares),
+    devToolsExtension ? devToolsExtension() : identity
+  );
 
-    if (module.hot) {
-      module.hot.accept('../reducers', () =>
-        store.replaceReducer(require('../reducers'))
-      );
-    }
+  const store = createStore(
+    reducers,
+    initialState,
+    enhancer
+  );
 
-    return store;
-  };
+  if (module.hot) {
+    module.hot.accept('../reducers', () => {
+      // eslint-disable-next-line global-require
+      store.replaceReducer(require('../reducers').default);
+    });
+  }
+
+  return store;
 }
-
-export default configureStore;
