@@ -49,22 +49,22 @@ const Player = ({
             <IconButton
               icon="skip_previous"
               disabled={cursor === navigation.first}
-              onClick={actions.selectMove.bind(null, navigation.first)}
+              onClick={actions.firstMove}
             />
             <IconButton
               icon="navigate_before"
               disabled={cursor === navigation.previous}
-              onClick={actions.selectMove.bind(null, navigation.previous)}
+              onClick={actions.prevMove}
             />
             <IconButton
               icon="navigate_next"
               disabled={cursor === navigation.next}
-              onClick={actions.selectMove.bind(null, navigation.next)}
+              onClick={actions.nextMove}
             />
             <IconButton
               icon="skip_next"
               disabled={cursor === navigation.last}
-              onClick={actions.selectMove.bind(null, navigation.last)}
+              onClick={actions.lastMove}
             />
 
             <div className="mdl-layout-spacer"></div>
