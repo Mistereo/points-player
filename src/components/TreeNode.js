@@ -4,6 +4,19 @@ import { BLUE, RED } from '../constants/colors'
 
 import { pure } from 'recompose'
 
+
+function getFillColor(color, blueColor, redColor, emptyColor) {
+  if (color === BLUE) {
+    return blueColor
+  }
+
+  if (color === RED) {
+    return redColor
+  }
+
+  return emptyColor
+}
+
 const TreeNode = ({
   x,
   y,
@@ -22,7 +35,7 @@ const TreeNode = ({
       cx={x}
       cy={y}
       r={radius}
-      fill={color === BLUE ? blueColor : (color === RED ? redColor : emptyColor)}
+      fill={getFillColor(color, blueColor, redColor, emptyColor)}
     />
     {isActive ?
       <circle
