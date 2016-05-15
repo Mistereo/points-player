@@ -1,14 +1,14 @@
-import React, { PropTypes } from 'react';
-import classNames from 'classnames';
-import Markdown from 'react-remarkable';
+import React, { PropTypes } from 'react'
+import classNames from 'classnames'
+import Markdown from 'react-remarkable'
 
-import Tabs from './Tabs';
-import Tab from './Tab';
-import CanvasField from './CanvasField';
-import IconButton from './IconButton';
-import Tree from './Tree';
+import Tabs from './Tabs'
+import Tab from './Tab'
+import CanvasField from './CanvasField'
+import IconButton from './IconButton'
+import Tree from './Tree'
 
-import '../styles/player.css';
+import '../styles/player.css'
 
 
 const Player = ({
@@ -23,9 +23,9 @@ const Player = ({
   const classes = classNames(
     className,
     'points-player',
-  );
+  )
 
-  const comment = activeNode.comment || '';
+  const comment = activeNode.comment || ''
 
   return (
     <div className={classes}>
@@ -37,10 +37,10 @@ const Player = ({
           const move = {
             ...position,
             color: game.moving,
-          };
+          }
 
           if (game.check(move)) {
-            actions.addMove(cursor, move);
+            actions.addMove(cursor, move)
           }
         }}
       />
@@ -78,7 +78,7 @@ const Player = ({
           <Tab title="Комментарии" key="comment">
             <Markdown source={comment} />
           </Tab>
-          <Tab title="Информация" key="info"></Tab>
+          <Tab title="Информация" key="info" />
         </Tabs>
         <Tree
           {...navigationTree}
@@ -87,8 +87,8 @@ const Player = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
 Player.propTypes = {
   className: PropTypes.string,
@@ -98,6 +98,6 @@ Player.propTypes = {
   navigation: PropTypes.object,
   navigationTree: PropTypes.object,
   actions: PropTypes.object,
-};
+}
 
-export default Player;
+export default Player

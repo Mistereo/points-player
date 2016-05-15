@@ -1,12 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+import React, { Component, PropTypes } from 'react'
+import classNames from 'classnames'
 
 class MDLMenu extends Component {
   componentDidMount() {
-    window.componentHandler.upgradeElement(this.menu);
+    window.componentHandler.upgradeElement(this.menu)
   }
   componentWillUnmount() {
-    window.componentHandler.downgradeElements(this.menu);
+    window.componentHandler.downgradeElements(this.menu)
   }
   render() {
     const {
@@ -14,14 +14,14 @@ class MDLMenu extends Component {
       target,
       items = [],
       ...otherProps,
-    } = this.props;
+    } = this.props
 
     const classes = classNames(
       className,
       'mdl-menu',
       'mdl-menu--bottom-right',
       'mdl-js-menu',
-    );
+    )
 
     return (
       <ul
@@ -38,7 +38,7 @@ class MDLMenu extends Component {
           >{item.title}</li>
         )}
       </ul>
-    );
+    )
   }
 }
 
@@ -46,7 +46,7 @@ MDLMenu.propTypes = {
   className: PropTypes.string,
   target: PropTypes.string,
   items: PropTypes.array,
-};
+}
 
 
-export default MDLMenu;
+export default MDLMenu

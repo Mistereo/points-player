@@ -1,13 +1,13 @@
-import { createSelector } from 'reselect';
+import { createSelector } from 'reselect'
 
-import appearanceSelector from './appearanceSelector';
+import appearanceSelector from './appearanceSelector'
 import {
   gameCursorSelector,
   gameMovesSelector,
   gameActiveNodeSelector,
   gameSelector,
   gameNavigationSelector,
-  gameNavigationTreeSelector } from './gameSelectors';
+  gameNavigationTreeSelector } from './gameSelectors'
 
 
 export default createSelector(
@@ -27,4 +27,4 @@ export default createSelector(
     game,
     appearance,
   })
-);
+)

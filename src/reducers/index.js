@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
-import appearance from './appearance';
-import game from './game';
+import appearance from './appearance'
+import game from './game'
 
 const rootReducer = combineReducers({
   appearance,
   game,
-});
+})
 
-export default rootReducer;
+export default rootReducer

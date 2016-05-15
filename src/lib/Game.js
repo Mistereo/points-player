@@ -1,82 +1,82 @@
-import { EMPTY, BLUE, RED } from '../constants/colors';
-import Field from './Field';
+import { EMPTY, BLUE, RED } from '../constants/colors'
+import Field from './Field'
 
 
-const dx = [0, 1, 0, -1, 1, 1, -1, -1];
-const dy = [1, 0, -1, 0, 1, -1, -1, 1];
+const dx = [0, 1, 0, -1, 1, 1, -1, -1]
+const dy = [1, 0, -1, 0, 1, -1, -1, 1]
 
 export default class Game extends Field {
   constructor({
     width = 30,
     height = 30,
   }) {
-    super(width, height);
-    this.moving = BLUE;
+    super(width, height)
+    this.moving = BLUE
   }
   check({ x, y }) {
     return this.contains({ x, y }) &&
            this.empty({ x, y }) &&
-           this.free({ x, y });
+           this.free({ x, y })
   }
   place({ x, y, color }) {
     this.set({ x, y }, {
       color,
       owner: EMPTY,
-    });
+    })
   }
   apply({ x, y, color, ...move }) {
-    const captures = [];
-    this.place({ x, y, color });
-    this.moving = (color === BLUE) ? RED : BLUE;
+    const captures = []
+    this.place({ x, y, color })
+    this.moving = (color === BLUE) ? RED : BLUE
 
     if (move.processed) {
-      move.captures.forEach(({ x, y, color }) => this.owner({ x, y }, color));
-      return move.captures;
+      move.captures.forEach(({ x, y, color }) => this.owner({ x, y }, color))
+      return move.captures
     }
 
-    let somethingCaptured = false;
+    let somethingCaptured = false
     for (let t = 0; t < 4; t++) {
-      const captured = this.findCaptured(x + dx[t], y + dy[t], color);
+      const captured = this.findCaptured(x + dx[t], y + dy[t], color)
       if (captured.length) {
-        somethingCaptured = true;
-        captured.forEach(({ x, y }) => captures.push({ x, y, color }));
+        somethingCaptured = true
+        captured.forEach(({ x, y }) => captures.push({ x, y, color }))
       }
     }
 
     if (!somethingCaptured) {
-      const opponentColor = (color === BLUE) ? RED : BLUE;
-      const captured = this.findCaptured(x, y, opponentColor);
-      captured.forEach(({ x, y }) => captures.push({ x, y, color: opponentColor }));
+      const opponentColor = (color === BLUE) ? RED : BLUE
+      const captured = this.findCaptured(x, y, opponentColor)
+      captured.forEach(({ x, y }) => captures.push({ x, y, color: opponentColor }))
     }
 
-    captures.forEach(({ x, y, color }) => this.owner({ x, y }, color));
-    return captures;
+    captures.forEach(({ x, y, color }) => this.owner({ x, y }, color))
+    return captures
   }
   findCaptured(sx, sy, color) {
-    const used = {};
-    const queue = [];
-    const captured = [];
-    queue.push({ x: sx, y: sy });
+    const used = {}
+    const queue = []
+    const captured = []
+    queue.push({ x: sx, y: sy })
 
-    let enemy = false;
+    let enemy = false
     while (queue.length) {
-      const pos = queue.pop();
-      const id = this.id(pos);
+      const pos = queue.pop()
+      const id = this.id(pos)
 
       if (!this.contains(pos)) {
-        return [];
+        return []
       }
 
       if (used[id] || this.free(pos) && this.color(pos) === color) {
-        continue;
+        continue
       }
 
-      used[id] = true;
+      used[id] = true
       if (this.owner(pos) !== color) {
-        captured.push(pos);
+        captured.push(pos)
 
         if (!this.empty(pos)) {
-          enemy = true;
+          enemy = true
         }
       }
 
@@ -84,10 +84,10 @@ export default class Game extends Field {
         queue.push({
           x: pos.x + dx[t],
           y: pos.y + dy[t],
-        });
+        })
       }
     }
 
-    return enemy ? captured : [];
+    return enemy ? captured : []
   }
 }

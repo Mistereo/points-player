@@ -1,1 +1,1 @@
-export default (state) => state.appearance;
+export default (state) => state.appearance

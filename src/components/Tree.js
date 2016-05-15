@@ -1,17 +1,17 @@
-import React, { PropTypes } from 'react';
-import find from 'lodash/find';
+import React, { PropTypes } from 'react'
+import find from 'lodash/find'
 
-import Node from './TreeNode';
+import Node from './TreeNode'
 
 
-const TREE_ROOT = 0;
+const TREE_ROOT = 0
 
 function createCC({ nodeRadius, nodeSize }) {
-  return x => (x * nodeSize + nodeRadius);
+  return x => (x * nodeSize + nodeRadius)
 }
 
 function connectionPath(from, to) {
-  return `M ${from.x} ${from.y} L ${from.x} ${to.y} L ${to.x} ${to.y}`;
+  return `M ${from.x} ${from.y} L ${from.x} ${to.y} L ${to.x} ${to.y}`
 }
 
 const Tree = ({
@@ -26,13 +26,13 @@ const Tree = ({
   actions,
   ...otherProps,
 }) => {
-  const cc = createCC({ nodeRadius, nodeSize });
+  const cc = createCC({ nodeRadius, nodeSize })
 
-  const maxX = Math.max(0, ...nodes.map(node => cc(node.x)));
-  const maxY = Math.max(0, ...nodes.map(node => cc(node.y)));
+  const maxX = Math.max(0, ...nodes.map(node => cc(node.x)))
+  const maxY = Math.max(0, ...nodes.map(node => cc(node.y)))
 
-  const width = maxX + nodeRadius + 2 * padding;
-  const height = maxY + nodeRadius + 2 * padding;
+  const width = maxX + nodeRadius + 2 * padding
+  const height = maxY + nodeRadius + 2 * padding
 
   const path = connections.map(
     conn => connectionPath({
@@ -42,20 +42,20 @@ const Tree = ({
       x: cc(conn.to.x),
       y: cc(conn.to.y),
     })
-  ).join(' ');
+  ).join(' ')
 
   const activeNode = find(
     nodes,
     { id: cursor }
-  );
+  )
 
   return (
     <div
       className="points-player__game-tree"
       ref={node => {
         if (node && activeNode) {
-          node.scrollLeft = cc(activeNode.x) - node.offsetWidth / 2;
-          node.scrollTop = cc(activeNode.y) - node.offsetHeight / 2;
+          node.scrollLeft = cc(activeNode.x) - node.offsetWidth / 2
+          node.scrollTop = cc(activeNode.y) - node.offsetHeight / 2
         }
       }}
     >
@@ -85,8 +85,8 @@ const Tree = ({
         )}
       </svg>
     </div>
-  );
-};
+  )
+}
 
 Tree.propTypes = {
   cursor: PropTypes.number,
@@ -98,6 +98,6 @@ Tree.propTypes = {
   connectionPathColor: PropTypes.string,
   padding: PropTypes.number,
   actions: PropTypes.object,
-};
+}
 
-export default Tree;
+export default Tree

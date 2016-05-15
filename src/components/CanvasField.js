@@ -1,19 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import GameRenderer from '../lib/GameRenderer';
-import Game from '../lib/Game.js';
+import GameRenderer from '../lib/GameRenderer'
+import Game from '../lib/Game.js'
 
 class CanvasField extends Component {
   constructor(...args) {
-    super(...args);
+    super(...args)
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this)
   }
   componentDidMount() {
     const {
       game,
       ...otherProps,
-    } = this.props;
+    } = this.props
 
     this.renderer = new GameRenderer({
       ...otherProps,
@@ -21,34 +21,34 @@ class CanvasField extends Component {
       xSize: game.width,
       ySize: game.height,
       onClick: this.handleClick,
-    });
+    })
 
-    this.renderGame();
+    this.renderGame()
   }
   componentDidUpdate() {
-    this.renderGame();
+    this.renderGame()
   }
   handleClick(...args) {
     const {
       onClick,
-    } = this.props;
+    } = this.props
 
-    onClick(...args);
+    onClick(...args)
   }
   renderGame() {
     const {
       game,
       activeNode,
-    } = this.props;
+    } = this.props
 
-    this.renderer.renderGame(game);
-    this.renderer.renderLastMoveMarker(activeNode);
+    this.renderer.renderGame(game)
+    this.renderer.renderLastMoveMarker(activeNode)
   }
   render() {
     const {
       className,
       children,
-    } = this.props;
+    } = this.props
 
     return (
       <canvas
@@ -57,7 +57,7 @@ class CanvasField extends Component {
       >
         {children}
       </canvas>
-    );
+    )
   }
 }
 
@@ -67,6 +67,6 @@ CanvasField.propTypes = {
   children: PropTypes.node,
   onClick: PropTypes.func,
   activeNode: PropTypes.object,
-};
+}
 
-export default CanvasField;
+export default CanvasField

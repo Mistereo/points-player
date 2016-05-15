@@ -1,9 +1,9 @@
-import '../styles/logo.css';
+import '../styles/logo.css'
 
-import React, { PropTypes } from 'react';
-import classNames from 'classnames';
+import React, { PropTypes } from 'react'
+import classNames from 'classnames'
 
-import { pure } from 'recompose';
+import { pure } from 'recompose'
 
 
 const Logo = ({
@@ -16,7 +16,7 @@ const Logo = ({
   const classes = classNames(
     className,
     'logo'
-  );
+  )
   return (
     <div className={classes}>
       <svg className="logo__image" width="28" height="28">
@@ -29,8 +29,8 @@ const Logo = ({
         {title} <span className="logo__subtitle">{subtitle}</span>
       </span>
     </div>
-  );
-};
+  )
+}
 
 Logo.propTypes = {
   className: PropTypes.string,
@@ -38,6 +38,6 @@ Logo.propTypes = {
   redColor: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,
-};
+}
 
-export default pure(Logo);
+export default pure(Logo)

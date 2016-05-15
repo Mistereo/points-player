@@ -1,11 +1,11 @@
-import '../styles/header.css';
+import '../styles/header.css'
 
-import React, { PropTypes } from 'react';
-import classNames from 'classnames';
+import React, { PropTypes } from 'react'
+import classNames from 'classnames'
 
-import { pure } from 'recompose';
+import { pure } from 'recompose'
 
-import Logo from './Logo';
+import Logo from './Logo'
 
 
 const Header = ({
@@ -18,7 +18,7 @@ const Header = ({
   const classes = classNames(
     className,
     'points-header'
-  );
+  )
   return (
     <header className={classes}>
       <div className="points-header__row">
@@ -31,8 +31,8 @@ const Header = ({
         <div className="flex-spacer"></div>
       </div>
     </header>
-  );
-};
+  )
+}
 
 Header.propTypes = {
   className: PropTypes.string,
@@ -40,6 +40,6 @@ Header.propTypes = {
   redColor: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,
-};
+}
 
-export default pure(Header);
+export default pure(Header)

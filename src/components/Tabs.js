@@ -1,16 +1,16 @@
-import '../styles/tabs.css';
+import '../styles/tabs.css'
 
 import React, {
   Children,
   PropTypes,
   cloneElement,
-} from 'react';
-import classNames from 'classnames';
+} from 'react'
+import classNames from 'classnames'
 
-import { pure, withState, compose } from 'recompose';
-import assign from 'lodash/assign';
-import partial from 'lodash/partial';
-import noop from 'lodash/noop';
+import { pure, withState, compose } from 'recompose'
+import assign from 'lodash/assign'
+import partial from 'lodash/partial'
+import noop from 'lodash/noop'
 
 
 const Tabs = ({
@@ -21,26 +21,26 @@ const Tabs = ({
 
   children,
 }) => {
-  const classes = classNames(className, 'tabs');
+  const classes = classNames(className, 'tabs')
 
-  const tabsCount = Children.count(children);
+  const tabsCount = Children.count(children)
 
-  let activeIndex = 0;
+  let activeIndex = 0
   Children.forEach(children, (tab, index) => {
     if (tab.key === active) {
-      activeIndex = index;
+      activeIndex = index
     }
-  });
+  })
 
-  const sliderWidth = 100 / tabsCount;
-  const sliderLeft = sliderWidth * activeIndex;
+  const sliderWidth = 100 / tabsCount
+  const sliderLeft = sliderWidth * activeIndex
 
   const sliderStyles = {
     width: `${sliderWidth}%`,
     left: `${sliderLeft}%`,
-  };
+  }
 
-  const current = String(active);
+  const current = String(active)
 
   return (
     <div className={classes}>
@@ -48,7 +48,7 @@ const Tabs = ({
         {Children.map(children, (tab) => {
           const headerClasses = classNames('tabs__tab', {
             'is-active': tab.key === current,
-          });
+          })
 
           return (
             <a
@@ -56,7 +56,7 @@ const Tabs = ({
               className={headerClasses}
               onClick={partial(onSelect, tab.key, noop)}
             >{tab.props.title}</a>
-          );
+          )
         })}
         <div className="tabs__slider" style={sliderStyles}></div>
       </div>
@@ -65,24 +65,24 @@ const Tabs = ({
           key: tab.key,
           ref: tab.ref,
           active: tab.key === current,
-        });
+        })
 
-        return cloneElement(tab, props);
+        return cloneElement(tab, props)
       })}
     </div>
-  );
-};
+  )
+}
 
 Tabs.propTypes = {
   className: PropTypes.string,
   active: PropTypes.any,
   onSelect: PropTypes.func,
   children: PropTypes.node,
-};
+}
 
 const enhance = compose(
   pure,
   withState('active', 'onSelect', props => props.active)
-);
+)
 
-export default enhance(Tabs);
+export default enhance(Tabs)

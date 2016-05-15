@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
-import { BLUE, RED } from '../constants/colors';
+import { BLUE, RED } from '../constants/colors'
 
 import { pure } from 'recompose'
 
@@ -40,7 +40,7 @@ const TreeNode = ({
         }}
       >{label}</text>}
   </g>
-);
+)
 
 TreeNode.propTypes = {
   x: PropTypes.number,
@@ -54,6 +54,6 @@ TreeNode.propTypes = {
   redColor: PropTypes.string,
   labelColor: PropTypes.string,
   onClick: PropTypes.func,
-};
+}
 
-export default pure(TreeNode);
+export default pure(TreeNode)

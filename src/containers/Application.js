@@ -1,13 +1,13 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import '../styles/application.css'
 
-import Player from '../components/Player';
-import Header from '../components/Header';
-import * as Actions from '../actions';
-import rootSelector from '../selectors';
+import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import '../styles/application.css';
+import Player from '../components/Player'
+import Header from '../components/Header'
+import * as Actions from '../actions'
+import rootSelector from '../selectors'
 
 
 const Application = (props) => (
@@ -17,15 +17,15 @@ const Application = (props) => (
       <Player {...props} />
     </main>
   </div>
-);
+)
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(Actions, dispatch),
-  };
+  }
 }
 
 export default connect(
   rootSelector,
   mapDispatchToProps
-)(Application);
+)(Application)

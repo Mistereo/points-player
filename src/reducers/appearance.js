@@ -1,5 +1,5 @@
-import createReducer from '../utils/createReducer';
-import { SET_APPEARANCE, RESET_APPEARANCE } from '../constants/actions';
+import createReducer from '../utils/createReducer'
+import { SET_APPEARANCE, RESET_APPEARANCE } from '../constants/actions'
 
 
 export const initialState = {
@@ -19,14 +19,12 @@ export const initialState = {
   borderWidth: 0,
 
   nodeSize: 22,
-};
+}
 
 export default createReducer(initialState, {
-  [SET_APPEARANCE]: (state, { payload }) => {
-    return {
-      ...state,
-      ...payload,
-    };
-  },
+  [SET_APPEARANCE]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
   [RESET_APPEARANCE]: () => initialState,
-});
+})
