@@ -18,13 +18,13 @@ if (__DEVELOPMENT__) {
 
 const store = configureStore()
 
-const mountNode = document.body
+const MOUNT_NODE = document.getElementById('root')
 
 ReactDOM.render(
   <AppContainer>
     <Root store={store} />
   </AppContainer>,
-  mountNode
+  MOUNT_NODE
 )
 
 if (module.hot) {
@@ -35,7 +35,7 @@ if (module.hot) {
       <AppContainer>
         <NextApp store={store} />
       </AppContainer>,
-      mountNode
+      MOUNT_NODE
     )
   })
 }
