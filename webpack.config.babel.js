@@ -1,6 +1,7 @@
 require('dotenv').load();
 
-var Path = require('path');
+import Path from 'path'
+
 var WebPack = require('webpack');
 var HTMLPlugin = require('html-webpack-plugin');
 

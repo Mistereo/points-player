@@ -1,6 +1,6 @@
-import merge from 'lodash/object/merge';
-import union from 'lodash/array/union';
-import findIndex from 'lodash/array/findIndex';
+import merge from 'lodash/merge';
+import union from 'lodash/union';
+import findIndex from 'lodash/findIndex';
 import SGF from 'sgfjs';
 
 import normalizeSGFTree from '../utils/normalizeSGFTree';

@@ -1,5 +1,5 @@
 import React from 'react';
-import find from 'lodash/collection/find';
+import find from 'lodash/find';
 
 import Node from './TreeNode';
 
