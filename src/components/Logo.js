@@ -1,7 +1,9 @@
+import '../styles/logo.css';
+
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-import '../styles/logo.css';
+import { pure } from 'recompose';
 
 
 const Logo = ({
@@ -38,4 +40,4 @@ Logo.propTypes = {
   subtitle: PropTypes.string,
 };
 
-export default Logo;
+export default pure(Logo);

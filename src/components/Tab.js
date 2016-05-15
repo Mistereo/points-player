@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
+import { pure } from 'recompose'
+
 const Tab = ({
   className,
   onClick,
@@ -22,4 +24,4 @@ Tab.propTypes = {
   children: PropTypes.node,
 };
 
-export default Tab;
+export default pure(Tab);

@@ -13,6 +13,7 @@
     "react-dom": "^15.0.2",
     "react-redux": "^4.4.5",
     "react-remarkable": "^1.1.1",
+    "recompose": "^0.18.0",
     "redux": "^3.5.2",
     "redux-form": "^5.2.3",
     "redux-logger": "^2.0.4",

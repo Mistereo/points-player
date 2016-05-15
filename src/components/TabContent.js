@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
+import { pure } from 'recompose'
+
 const TabContent = ({
   children,
   className,
@@ -24,4 +26,4 @@ TabContent.propTypes = {
   isActive: PropTypes.bool,
 };
 
-export default TabContent;
+export default pure(TabContent);

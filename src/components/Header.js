@@ -1,9 +1,11 @@
+import '../styles/header.css';
+
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-import Logo from './Logo';
+import { pure } from 'recompose';
 
-import '../styles/header.css';
+import Logo from './Logo';
 
 
 const Header = ({
@@ -40,4 +42,4 @@ Header.propTypes = {
   subtitle: PropTypes.string,
 };
 
-export default Header;
+export default pure(Header);

@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
+import { pure } from 'recompose'
+
 import Tab from './Tab';
 import TabContent from './TabContent';
 
@@ -71,4 +73,4 @@ class Tabs extends Component {
   }
 }
 
-export default Tabs;
+export default pure(Tabs);
