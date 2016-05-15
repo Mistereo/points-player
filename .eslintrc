@@ -3,5 +3,16 @@
   "extends": "airbnb",
   "env": {
     "browser": true
+  },
+  "rules": {
+    "semi": ["error", "never"],
+    "eqeqeq": ["error", "allow-null"]
+  },
+  "globals": {
+    "__ENVIRONMENT__": true,
+    "__DEVELOPMENT__": true,
+    "__PRODUCTION__": true,
+    "__DEBUG__": true,
+    "__TEST__": true
   }
 }
