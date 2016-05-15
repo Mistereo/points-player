@@ -1,76 +1,88 @@
-import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-
-import { pure } from 'recompose'
-
-import Tab from './Tab';
-import TabContent from './TabContent';
-
 import '../styles/tabs.css';
 
+import React, {
+  Children,
+  PropTypes,
+  cloneElement,
+} from 'react';
+import classNames from 'classnames';
 
-class Tabs extends Component {
-  static propTypes = {
-    activeTab: PropTypes.number,
-    tabs: PropTypes.arrayOf(PropTypes.shape({
-      label: PropTypes.node,
-      content: PropTypes.node,
-    })),
-    className: PropTypes.string,
+import { pure, withState, compose } from 'recompose';
+import assign from 'lodash/assign';
+import partial from 'lodash/partial';
+import noop from 'lodash/noop';
+
+
+const Tabs = ({
+  className,
+
+  active,
+  onSelect,
+
+  children,
+}) => {
+  const classes = classNames(className, 'tabs');
+
+  const tabsCount = Children.count(children);
+
+  let activeIndex = 0;
+  Children.forEach(children, (tab, index) => {
+    if (tab.key === active) {
+      activeIndex = index;
+    }
+  });
+
+  const sliderWidth = 100 / tabsCount;
+  const sliderLeft = sliderWidth * activeIndex;
+
+  const sliderStyles = {
+    width: `${sliderWidth}%`,
+    left: `${sliderLeft}%`,
   };
-  static defaultProps = {
-    activeTab: 0,
-    tabs: [],
-  };
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeTab: props.activeTab,
-    };
-  }
-  selectTab(id) {
-    this.setState({
-      activeTab: id,
-    });
-  }
-  render() {
-    const { className, tabs } = this.props;
-    const { activeTab } = this.state;
 
-    const classes = classNames(
-      className,
-      'tabs',
-    );
+  const current = String(active);
 
-    const sliderWidth = 100 / tabs.length;
-    const sliderLeft = sliderWidth * activeTab;
+  return (
+    <div className={classes}>
+      <div className="tabs__tab-bar">
+        {Children.map(children, (tab) => {
+          const headerClasses = classNames('tabs__tab', {
+            'is-active': tab.key === current,
+          });
 
-    const sliderStyles = {
-      width: `${sliderWidth}%`,
-      left: `${sliderLeft}%`,
-    };
-
-    return (
-      <div className={classes}>
-        <div className="tabs__tab-bar">
-          {tabs.map((tab, id) =>
-            <Tab
-              onClick={this.selectTab.bind(this, id)} key={id}
-              isActive={id === activeTab}
-            >
-              {tab.label}
-            </Tab>
-          )}
-          <div className="tabs__slider" style={sliderStyles}></div>
-        </div>
-        {tabs.map((tab, id) =>
-          <TabContent isActive={id === activeTab} key={id}>
-            {tab.content}
-          </TabContent>
-        )}
+          return (
+            <a
+              href="#"
+              className={headerClasses}
+              onClick={partial(onSelect, tab.key, noop)}
+            >{tab.props.title}</a>
+          );
+        })}
+        <div className="tabs__slider" style={sliderStyles}></div>
       </div>
-    );
-  }
-}
+      {Children.map(children, (tab) => {
+        const props = assign({}, tab.props, {
+          key: tab.key,
+          ref: tab.ref,
+          active: tab.key === current,
+        });
 
-export default pure(Tabs);
+        return cloneElement(tab, props);
+      })}
+    </div>
+  );
+};
+
+Tabs.propTypes = {
+  className: PropTypes.string,
+  active: PropTypes.any,
+  onSelect: PropTypes.func,
+  children: PropTypes.node,
+};
+
+const enhance = compose(
+  pure,
+  withState('active', 'onSelect', props => props.active)
+);
+
+export default enhance(Tabs);

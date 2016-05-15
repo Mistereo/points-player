@@ -1,27 +1,29 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-import { pure } from 'recompose'
+import { pure } from 'recompose';
 
 const Tab = ({
+  children,
   className,
-  onClick,
-  isActive = false,
-  children = '',
+  active = false,
 }) => {
   const classes = classNames(
     className,
-    'tabs__tab', {
-      'is-active': isActive,
+    'tabs__content', {
+      'is-active': active,
     });
-  return <a href="#" className={classes} onClick={onClick}>{children}</a>;
+  return (
+    <div className={classes}>
+      {children}
+    </div>
+  );
 };
 
 Tab.propTypes = {
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  isActive: PropTypes.bool,
   children: PropTypes.node,
+  className: PropTypes.string,
+  active: PropTypes.bool,
 };
 
 export default pure(Tab);

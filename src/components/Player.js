@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import Markdown from 'react-remarkable';
 
 import Tabs from './Tabs';
+import Tab from './Tab';
 import CanvasField from './CanvasField';
 import IconButton from './IconButton';
 import Tree from './Tree';
@@ -73,16 +74,12 @@ const Player = ({
             <IconButton id="player-menu" icon="more_vert" disabled />
           </div>
         </div>
-        <Tabs
-          className="points-player__tabs"
-          tabs={[{
-            label: 'Комментарии',
-            content: <Markdown source={comment} />,
-          }, {
-            label: 'Информация',
-            content: '',
-          }]}
-        />
+        <Tabs className="points-player__tabs" active="comment">
+          <Tab title="Комментарии" key="comment">
+            <Markdown source={comment} />
+          </Tab>
+          <Tab title="Информация" key="info"></Tab>
+        </Tabs>
         <Tree
           {...navigationTree}
           cursor={cursor}
