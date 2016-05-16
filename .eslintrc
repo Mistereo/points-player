@@ -6,7 +6,8 @@
   },
   "rules": {
     "semi": ["error", "never"],
-    "eqeqeq": ["error", "allow-null"]
+    "eqeqeq": ["error", "allow-null"],
+    "no-shadow": ["warn"]
   },
   "globals": {
     "__ENVIRONMENT__": true,
