@@ -14,9 +14,7 @@ export default class Game extends Field {
     this.moving = BLUE
   }
   check({ x, y }) {
-    return this.contains({ x, y }) &&
-           this.empty({ x, y }) &&
-           this.free({ x, y })
+    return this.contains({ x, y }) && this.empty({ x, y }) && this.free({ x, y })
   }
   place({ x, y, color }) {
     this.set({ x, y }, {
